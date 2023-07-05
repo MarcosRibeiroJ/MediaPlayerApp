@@ -20,5 +20,10 @@
         <Border Grid.Column="1" Background="#1f3d7a"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
 
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal"
+            HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Button FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE768;" />
+        </StackPanel>
+
     </Grid>
 </Window>
