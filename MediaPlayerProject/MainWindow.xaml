@@ -21,34 +21,39 @@
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
         
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-        </Grid.RowDefinitions>
-            <Border Background="Black"/>
-            <Border Grid.Column="1" Background="White"/>
-            <Border Grid.Column="2" Background="Red"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+                <Border Background="Black"/>
+                <Border Grid.Column="1" Background="White"/>
+                <Border Grid.Column="2" Background="Red"/>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Margin="0,0,0,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE767;" />
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE768;" />
-                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE769;" />
-                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE892;" />
-                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE71A;" />
-                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE893;" />
+                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF5B0;" />
+                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AE;" />
+                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AC;" />
+                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="30" Content="&#xE73B;" />
+                <Button Margin="0,0,20,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AD;" />
             </StackPanel>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Margin="0,0,0,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xE740;" />
             </StackPanel>
         </Grid>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Margin="0,20,0,20" FontFamily="Segoe MDL2 Assets" Width="100" Height="50" FontSize="35" Content="&#xE8E5;" />
+            <Button Margin="0,0,0,0" FontFamily="Segoe MDL2 Assets" Width="100" Height="50" FontSize="35" Content="&#xED25;" />
+        </StackPanel>
 
     </Grid>
 </Window>
