@@ -41,14 +41,9 @@ namespace MediaPlayerProject
             MediaFile.Stop();
         }
 
-        // Change the volume of the media.
         private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Obtain the current volume slider value
-            double novoVolume = volume.Value;
-
-            // Define new MediaElement Volume Defina o novo volume no MediaElement
-            MediaFile.Volume = novoVolume;
+            MediaFile.Volume = (double)volume.Value;
         }
 
 
