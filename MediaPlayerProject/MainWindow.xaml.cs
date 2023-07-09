@@ -24,5 +24,10 @@ namespace MediaPlayerProject
         {
             InitializeComponent();
         }
+
+        private void Play(object sender, RoutedEventArgs e)
+        {
+            MediaFile.Play();
+        }
     }
 }
