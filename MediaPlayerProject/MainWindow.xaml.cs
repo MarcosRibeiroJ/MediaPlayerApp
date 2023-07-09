@@ -21,6 +21,10 @@ namespace MediaPlayerProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const double MaxSpeed = 2.0;
+        private const double MinSpeed = 0.5;
+
+        private const double SpeedIncrement = 0.25;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +45,27 @@ namespace MediaPlayerProject
             MediaFile.Stop();
         }
 
+        private void FastFoward(object sender, RoutedEventArgs e)
+        {
+            if(MediaFile.SpeedRatio < MaxSpeed)
+                MediaFile.SpeedRatio += SpeedIncrement;
+
+            AtualizaLabel();
+        }
+
+        private void Rewind(object sender, RoutedEventArgs e)
+        {
+            if(MediaFile.SpeedRatio > MinSpeed)
+                MediaFile.SpeedRatio -= SpeedIncrement;
+            
+            AtualizaLabel();
+        }
+
+        private void AtualizaLabel()
+        {
+            speed.Content = $"{MediaFile.SpeedRatio.ToString("F2")}x";
+        }
+
         private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaFile.Volume = (double)volume.Value;
@@ -56,7 +81,6 @@ namespace MediaPlayerProject
             MediaFile.Position = newPosition;
         }
 
-
         private void Open(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -66,6 +90,7 @@ namespace MediaPlayerProject
                 string filePath = openFileDialog.FileName;
                 MediaFile.Source = new Uri(filePath);
                 MediaFile.Play();
+                AtualizaLabel();
             }
         }
     }
