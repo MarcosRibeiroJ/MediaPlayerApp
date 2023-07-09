@@ -33,7 +33,7 @@
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Margin="10,0,10,0" Click="Play" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF5B0;" />
-            <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AE;" />
+            <Button Margin="0,0,10,0" Click="Pause" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AE;" />
             <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AC;" />
             <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="30" Content="&#xE73B;" />
             <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AD;" />

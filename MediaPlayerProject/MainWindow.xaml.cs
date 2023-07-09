@@ -29,5 +29,10 @@ namespace MediaPlayerProject
         {
             MediaFile.Play();
         }
+
+        private void Pause(object sender, RoutedEventArgs e)
+        {
+            MediaFile.Pause();
+        }
     }
 }
