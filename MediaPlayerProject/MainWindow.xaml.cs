@@ -42,16 +42,26 @@ namespace MediaPlayerProject
         }
 
         // Change the volume of the media.
-        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Obtain the current volume slider value
-            double novoVolume = volume.Value;
-
-            // Define new MediaElement Volume Defina o novo volume no MediaElement
-            MediaFile.Volume = novoVolume;
+            MediaFile.Volume = (double)volumeSlider.Value;
         }
+        // Change the speed of the media.
+        private void ChangeMediaSpeedRatio(object sender, RoutedPropertyChangedEventArgs<double> args)
+        {
+            MediaFile.SpeedRatio = (double)speedSlider.Value;
+        }
+        
+        // Jump to different parts of the media (seek to).
+        private void SeekToMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> args)
+        {
+            int SliderValue = (int)timelineSlider.Value;
 
-
+            // Overloaded constructor takes the arguments days, hours, minutes, seconds, milliseconds.
+            // Create a TimeSpan with miliseconds equal to the slider value.
+            TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
+            MediaFile.Position = ts;
+        }
         private void Open(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

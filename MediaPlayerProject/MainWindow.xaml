@@ -26,6 +26,9 @@
 
         <StackPanel Grid.Column="1" Grid.Row="0" Background="Green" >
             <MediaElement LoadedBehavior="Manual" x:Name="MediaFile"/>
+             <!-- Seek to slider. Ths slider allows you to jump to different parts of the media playback. -->
+        <TextBlock Foreground="White" Margin="5"  VerticalAlignment="Center">Seek To</TextBlock>
+            <Slider Name="timelineSlider" Margin="5" ValueChanged="SeekToMediaPosition" Width="70"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -38,9 +41,17 @@
                 FontSize="25"
                 FontWeight="Bold"
                 Content="Volume: "/>
-                <Slider Height="23" Name="volume" Maximum="1" Width="100" Margin="0,10,0,0"
+                <Slider Height="23" Name="volumeSlider" Maximum="1" Width="100" Margin="0,10,0,0"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                    ValueChanged="volume_ValueChanged"/>
+                    ValueChanged="ChangeMediaVolume"/>
+            <!-- Speed slider. This slider allows you to change the speed of the media playback. -->
+            <Label Margin="20,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="25"
+                FontWeight="Bold"
+                Content="Speed: "/>
+                <Slider Height="23" Name="speedSlider" Value="1" Maximum="3" Width="100" Margin="0,10,0,0"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    ValueChanged="ChangeMediaSpeedRatio"/>
         </StackPanel>
 
     </Grid>
