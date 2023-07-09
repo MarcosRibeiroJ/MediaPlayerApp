@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Windows.Threading;
 
 namespace MediaPlayerProject
 {
@@ -41,21 +42,43 @@ namespace MediaPlayerProject
             MediaFile.Stop();
         }
 
-        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void VolumeUpdate(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaFile.Volume = (double)volume.Value;
         }
-        private void ChangePosition(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            MediaFile.Pause();
-            double sliderValue = posicao.Value;
-            TimeSpan mediaDuration = MediaFile.NaturalDuration.TimeSpan;
-            TimeSpan newPosition = TimeSpan.FromTicks((long)(sliderValue * mediaDuration.Ticks));
-            MediaFile.Play();
+        
+        private DispatcherTimer timer;
 
-            MediaFile.Position = newPosition;
+        private void InitializeSliderValue(object sender, EventArgs e)
+        {
+            mediaPosition.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalMilliseconds;
+            
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(500); // Define o intervalo de atualização
+
+            // Define o evento que será chamado a cada intervalo
+            timer.Tick += SliderPositionUpdate;
+
+            // Inicia o timer
+            timer.Start();
         }
 
+        private void SliderPositionUpdate(object sender, EventArgs e)
+        {
+            // Verifica se a mídia está carregada e em reprodução
+            if (MediaFile.NaturalDuration.HasTimeSpan && MediaFile.NaturalDuration.TimeSpan.TotalMilliseconds > 0 && MediaFile.Position.TotalMilliseconds > 0)
+            {
+                // Atualiza o valor do Slider com a posição atual da mídia
+                mediaPosition.Value = MediaFile.Position.TotalMilliseconds;
+            }
+        }
+
+        private void ChangeMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int SliderValue = (int)mediaPosition.Value;
+            TimeSpan newPosition = new TimeSpan(0, 0, 0, 0, SliderValue);
+            MediaFile.Position = newPosition;
+        }
 
         private void Open(object sender, RoutedEventArgs e)
         {
