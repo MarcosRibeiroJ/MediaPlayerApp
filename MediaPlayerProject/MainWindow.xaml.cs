@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace MediaPlayerProject
 {
@@ -33,6 +34,23 @@ namespace MediaPlayerProject
         private void Pause(object sender, RoutedEventArgs e)
         {
             MediaFile.Pause();
+        }
+
+        private void Stop(object sender, RoutedEventArgs e)
+        {
+            MediaFile.Stop();
+        }
+
+        private void Open(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Media Files|*.mp3;*.mp4;*.avi;*.mkv;*.mov;*.wmv";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+                MediaFile.Source = new Uri(filePath);
+                MediaFile.Play();
+            }
         }
     }
 }

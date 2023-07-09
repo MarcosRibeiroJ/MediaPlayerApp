@@ -21,21 +21,18 @@
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
         
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button Margin="0,20,0,0" FontFamily="Segoe MDL2 Assets" Width="100" Height="50" FontSize="35" Content="&#xED25;" />
+            <Button Margin="0,20,0,0" Click="Open" FontFamily="Segoe MDL2 Assets" Width="100" Height="50" FontSize="35" Content="&#xED25;" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Background="Green" >
-            <MediaElement Source="C:\Users\mribeiro\Downloads\teste.mp3" 
-                LoadedBehavior="Manual"
-                x:Name="MediaFile"
-            />
+            <MediaElement LoadedBehavior="Manual" x:Name="MediaFile"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Button Margin="10,0,10,0" Click="Play" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF5B0;" />
             <Button Margin="0,0,10,0" Click="Pause" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AE;" />
             <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AC;" />
-            <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="30" Content="&#xE73B;" />
+            <Button Margin="0,0,10,0" Click="Stop" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="30" Content="&#xE73B;" />
             <Button Margin="0,0,10,0" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AD;" />
             <Label Margin="20,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center"
                 FontSize="25"
