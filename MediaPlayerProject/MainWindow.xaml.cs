@@ -45,6 +45,16 @@ namespace MediaPlayerProject
         {
             MediaFile.Volume = (double)volume.Value;
         }
+        private void ChangePosition(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            MediaFile.Pause();
+            double sliderValue = posicao.Value;
+            TimeSpan mediaDuration = MediaFile.NaturalDuration.TimeSpan;
+            TimeSpan newPosition = TimeSpan.FromTicks((long)(sliderValue * mediaDuration.Ticks));
+            MediaFile.Play();
+
+            MediaFile.Position = newPosition;
+        }
 
 
         private void Open(object sender, RoutedEventArgs e)
