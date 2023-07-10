@@ -6,26 +6,25 @@
         xmlns:local="clr-namespace:MediaPlayerProject"
         mc:Ignorable="d"
         Title="Media Player App" Width="1024" Height="768" WindowState="Maximized">
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="10*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Border Background="#2f5cb6"/>
-        <Border Grid.Column="1" Background="#1f3d7a"/>
+        <Border Background="Black"/>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
         
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Button Margin="0,20,0,0" Click="Open" FontFamily="Segoe MDL2 Assets" Width="100" Height="50" FontSize="35" Content="&#xED25;" />
-        </StackPanel>
-
-        <StackPanel Grid.Column="1" Grid.Row="0" Background="Green" >
-            <MediaElement LoadedBehavior="Manual" x:Name="MediaFile" MediaOpened="ConfiguraSlider"/>
+        <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Menu Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}">
+            <MenuItem Header="_Arquivo">
+                <MenuItem Header="Abrir" Click="Open"/>
+            </MenuItem>
+        </Menu>
+            <MediaElement Height="610" LoadedBehavior="Manual" x:Name="MediaFile" MediaOpened="ConfiguraSlider"
+                Stretch="Fill" HorizontalAlignment="Stretch"
+            />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -56,6 +55,5 @@
                     Thumb.DragCompleted="PosicaoDragCompleted"
                     />
         </StackPanel>
-
     </Grid>
 </Window>
