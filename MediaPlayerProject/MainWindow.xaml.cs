@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.Win32;
 
 namespace MediaPlayerProject
@@ -25,6 +26,7 @@ namespace MediaPlayerProject
         private const double MinSpeed = 0.5;
 
         private const double SpeedIncrement = 0.25;
+        DispatcherTimer? timer;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,16 +35,21 @@ namespace MediaPlayerProject
         private void Play(object sender, RoutedEventArgs e)
         {
             MediaFile.Play();
+            timer?.Start();
         }
 
         private void Pause(object sender, RoutedEventArgs e)
         {
             MediaFile.Pause();
+            timer?.Stop();
         }
 
         private void Stop(object sender, RoutedEventArgs e)
         {
             MediaFile.Stop();
+            MediaFile.Position = TimeSpan.Zero;
+            timer?.Stop();
+            posicao.Value = 0;
         }
 
         private void FastFoward(object sender, RoutedEventArgs e)
@@ -70,17 +77,41 @@ namespace MediaPlayerProject
         {
             MediaFile.Volume = (double)volume.Value;
         }
-        private void ChangePosition(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            MediaFile.Pause();
-            double sliderValue = posicao.Value;
-            TimeSpan mediaDuration = MediaFile.NaturalDuration.TimeSpan;
-            TimeSpan newPosition = TimeSpan.FromTicks((long)(sliderValue * mediaDuration.Ticks));
-            MediaFile.Play();
 
-            MediaFile.Position = newPosition;
+        private void AtualizaPosicaoSlider(object? sender, EventArgs e)
+        {
+            //Sincroniza a posicao do slider com a posição da mídia
+            posicao.Value = MediaFile.Position.TotalSeconds;
+        }
+        private void AtualizaPosicaoMedia(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //Sincroniza a posicao da mídia com o valor do slider convertido em segundos
+            MediaFile.Position = TimeSpan.FromSeconds(posicao.Value);
+        }
+        private void PosicaoDragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            //Quando slider começa a se mover, pausa a mídia e o tempo do objeto timer
+            MediaFile.Pause();
+            timer?.Stop();
         }
 
+        private void PosicaoDragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            //Quando o slider para de se mover, reinicia a mídia e o tempo do objeto timer
+            MediaFile.Play();
+            timer?.Start();
+        }
+
+        private void ConfiguraSlider(object sender, RoutedEventArgs e)
+        {
+            //Método que inicia o timer e configura seu intervalo de 1 em 1 segundo
+            //também atualiza o valor do timer com a posicao atual do slider
+            posicao.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalSeconds;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += AtualizaPosicaoSlider;
+            timer.Start();
+        }
         private void Open(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
