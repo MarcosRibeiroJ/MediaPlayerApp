@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         
         <Border Background="Black"/>
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#A9A9A9"/>
         
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Menu Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}">
