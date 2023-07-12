@@ -49,10 +49,10 @@ namespace MediaPlayerProject
             MediaFile.Stop();
             MediaFile.Position = TimeSpan.Zero;
             timer?.Stop();
-            posicao.Value = 0;
+            position.Value = 0;
         }
 
-        private void FastFoward(object sender, RoutedEventArgs e)
+        private void FastForward(object sender, RoutedEventArgs e)
         {
             if(MediaFile.SpeedRatio < MaxSpeed)
                 MediaFile.SpeedRatio += SpeedIncrement;
@@ -73,29 +73,29 @@ namespace MediaPlayerProject
             speed.Content = $"{MediaFile.SpeedRatio.ToString("F2")}x";
         }
 
-        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void VolumeValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             MediaFile.Volume = (double)volume.Value;
         }
 
-        private void AtualizaPosicaoSlider(object? sender, EventArgs e)
+        private void UpdateSliderPosition(object? sender, EventArgs e)
         {
             //Sincroniza a posicao do slider com a posição da mídia
-            posicao.Value = MediaFile.Position.TotalSeconds;
+            position.Value = MediaFile.Position.TotalSeconds;
         }
-        private void AtualizaPosicaoMedia(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void UpdateMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             //Sincroniza a posicao da mídia com o valor do slider convertido em segundos
-            MediaFile.Position = TimeSpan.FromSeconds(posicao.Value);
+            MediaFile.Position = TimeSpan.FromSeconds(position.Value);
         }
-        private void PosicaoDragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        private void DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
             //Quando slider começa a se mover, pausa a mídia e o tempo do objeto timer
             MediaFile.Pause();
             timer?.Stop();
         }
 
-        private void PosicaoDragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        private void DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             //Quando o slider para de se mover, reinicia a mídia e o tempo do objeto timer
             MediaFile.Play();
@@ -107,10 +107,10 @@ namespace MediaPlayerProject
             //Método que inicia o timer e configura seu intervalo de 1 em 1 segundo
             //Atualiza o valor do timer com a posicao atual do slider
             //Exibe no label o tempo total da mídia carregada
-            posicao.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalSeconds;
+            position.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalSeconds;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += AtualizaPosicaoSlider;
+            timer.Tick += UpdateSliderPosition;
             timer.Start();
 
             totalMediaTime.Content = MediaFile.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss");            
