@@ -124,5 +124,10 @@ namespace MediaPlayerProject
                 AtualizaLabel();
             }
         }
+
+        private void MediaError(object sender, ExceptionRoutedEventArgs e)
+        {
+            MessageBox.Show("O arquivo selecionado não é suportado", "Erro ao carregar arquivo", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

@@ -28,7 +28,7 @@
             </MenuItem>
         </Menu>
             <MediaElement Height="610" LoadedBehavior="Manual" x:Name="MediaFile" MediaOpened="ConfiguraSlider"
-                Stretch="Fill" HorizontalAlignment="Stretch"
+                Stretch="Fill" HorizontalAlignment="Stretch" MediaFailed="MediaError"
             />
         </StackPanel>
 
