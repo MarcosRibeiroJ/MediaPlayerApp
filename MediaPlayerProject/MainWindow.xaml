@@ -27,9 +27,8 @@
                 <MenuItem Header="Abrir" Click="Open"/>
             </MenuItem>
         </Menu>
-            <MediaElement Height="610" LoadedBehavior="Manual" x:Name="MediaFile" MediaOpened="ConfiguraSlider"
-                Stretch="Fill" HorizontalAlignment="Stretch" MediaFailed="MediaError"
-            />
+            <MediaElement Height="610" LoadedBehavior="Manual" x:Name="MediaFile"
+                Stretch="Fill" HorizontalAlignment="Stretch" MediaOpened="MediaOpened" MediaFailed="MediaError"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
@@ -55,8 +54,10 @@
                 VerticalAlignment="Center" HorizontalAlignment="Center" Value="0"
                 ValueChanged="AtualizaPosicaoMedia"
                 Thumb.DragStarted="PosicaoDragStarted"
-                Thumb.DragCompleted="PosicaoDragCompleted"
-            />
+                Thumb.DragCompleted="PosicaoDragCompleted"/>
+            <Label Margin="5,0,0,0" x:Name="totalMediaTime" VerticalAlignment="Center" HorizontalAlignment="Center"
+                FontSize="20"
+                Content="--:--"/>
         </StackPanel>
     </Grid>
 </Window>

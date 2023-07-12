@@ -24,9 +24,9 @@ namespace MediaPlayerProject
     {
         private const double MaxSpeed = 2.0;
         private const double MinSpeed = 0.5;
-
         private const double SpeedIncrement = 0.25;
         DispatcherTimer? timer;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -102,15 +102,18 @@ namespace MediaPlayerProject
             timer?.Start();
         }
 
-        private void ConfiguraSlider(object sender, RoutedEventArgs e)
+        private void MediaOpened(object sender, RoutedEventArgs e)
         {
             //Método que inicia o timer e configura seu intervalo de 1 em 1 segundo
-            //também atualiza o valor do timer com a posicao atual do slider
+            //Atualiza o valor do timer com a posicao atual do slider
+            //Exibe no label o tempo total da mídia carregada
             posicao.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalSeconds;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += AtualizaPosicaoSlider;
             timer.Start();
+
+            totalMediaTime.Content = MediaFile.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss");            
         }
         private void Open(object sender, RoutedEventArgs e)
         {
@@ -120,6 +123,7 @@ namespace MediaPlayerProject
             {
                 string filePath = openFileDialog.FileName;
                 MediaFile.Source = new Uri(filePath);
+
                 MediaFile.Play();
                 AtualizaLabel();
             }
