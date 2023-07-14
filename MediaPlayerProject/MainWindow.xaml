@@ -12,14 +12,11 @@
 
 
     
-    <Grid>
+    <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border Background="Black"/>
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#A9A9A9"/>
         
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Menu Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}">
@@ -31,7 +28,7 @@
                 Stretch="Fill" HorizontalAlignment="Stretch" MediaOpened="MediaOpened" MediaFailed="MediaError"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A9A9A9">
             <Button Margin="10,0,10,0" Click="Play" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF5B0;" />
             <Button Margin="0,0,10,0" Click="Pause" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xF8AE;" />
             <Button Margin="0,0,10,0" Click="Rewind" FontFamily="Segoe MDL2 Assets" Width="70" Height="50" FontSize="35" Content="&#xEB9E;" />
