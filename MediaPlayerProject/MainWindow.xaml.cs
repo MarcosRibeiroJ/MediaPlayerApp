@@ -98,9 +98,6 @@ namespace MediaPlayerProject
 
         private void MediaOpened(object sender, RoutedEventArgs e)
         {
-            //Método que inicia o timer e configura seu intervalo de 1 em 1 segundo
-            //Atualiza o valor do timer com a posicao atual do slider
-            //Exibe no label o tempo total da mídia carregada
             position.Maximum = MediaFile.NaturalDuration.TimeSpan.TotalSeconds;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
