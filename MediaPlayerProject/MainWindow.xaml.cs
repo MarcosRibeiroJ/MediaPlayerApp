@@ -14,17 +14,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using System.Windows.Controls.Primitives;
 
 namespace MediaPlayerProject
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private const double MaxSpeed = 2.0;
         private const double MinSpeed = 0.5;
-        private const double SpeedIncrement = 0.25;
+        private const double SpeedValue = 0.25;
         DispatcherTimer? timer;
 
         public MainWindow()
@@ -55,20 +53,20 @@ namespace MediaPlayerProject
         private void FastForward(object sender, RoutedEventArgs e)
         {
             if(MediaFile.SpeedRatio < MaxSpeed)
-                MediaFile.SpeedRatio += SpeedIncrement;
+                MediaFile.SpeedRatio += SpeedValue;
 
-            AtualizaLabel();
+            LabelUpdate();
         }
 
         private void Rewind(object sender, RoutedEventArgs e)
         {
             if(MediaFile.SpeedRatio > MinSpeed)
-                MediaFile.SpeedRatio -= SpeedIncrement;
+                MediaFile.SpeedRatio -= SpeedValue;
             
-            AtualizaLabel();
+            LabelUpdate();
         }
 
-        private void AtualizaLabel()
+        private void LabelUpdate()
         {
             speed.Content = $"{MediaFile.SpeedRatio.ToString("F2")}x";
         }
@@ -80,24 +78,20 @@ namespace MediaPlayerProject
 
         private void UpdateSliderPosition(object? sender, EventArgs e)
         {
-            //Sincroniza a posicao do slider com a posição da mídia
             position.Value = MediaFile.Position.TotalSeconds;
         }
         private void UpdateMediaPosition(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //Sincroniza a posicao da mídia com o valor do slider convertido em segundos
             MediaFile.Position = TimeSpan.FromSeconds(position.Value);
         }
-        private void DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        private void DragStarted(object sender, DragStartedEventArgs e)
         {
-            //Quando slider começa a se mover, pausa a mídia e o tempo do objeto timer
             MediaFile.Pause();
             timer?.Stop();
         }
 
-        private void DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        private void DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            //Quando o slider para de se mover, reinicia a mídia e o tempo do objeto timer
             MediaFile.Play();
             timer?.Start();
         }
@@ -113,7 +107,7 @@ namespace MediaPlayerProject
             timer.Tick += UpdateSliderPosition;
             timer.Start();
 
-            totalMediaTime.Content = MediaFile.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss");            
+            totalMediaTime.Content = MediaFile.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss");    
         }
         private void Open(object sender, RoutedEventArgs e)
         {
@@ -125,7 +119,7 @@ namespace MediaPlayerProject
                 MediaFile.Source = new Uri(filePath);
 
                 MediaFile.Play();
-                AtualizaLabel();
+                LabelUpdate();
             }
         }
 
